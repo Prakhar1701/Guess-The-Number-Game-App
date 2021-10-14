@@ -31,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
     public  void openActivityTwo(View view){
-        backToast.cancel();
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            backToast.cancel();
+        }
         Intent ActivityTwo =new Intent(this,MainActivity2.class);
         finish();
         startActivity(ActivityTwo);

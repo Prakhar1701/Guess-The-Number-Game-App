@@ -60,7 +60,9 @@ public class MainActivity3 extends AppCompatActivity {
 
     public void playAgain(View view) {
 //      Toast.makeText(MainActivity3.this, "Play Again", Toast.LENGTH_SHORT).show();
-        backToast.cancel();
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            backToast.cancel();
+        }
         Intent ActivityTwo = new Intent(this, MainActivity2.class);
         finish();
         startActivity(ActivityTwo);
