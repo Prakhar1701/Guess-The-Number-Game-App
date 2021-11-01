@@ -4,20 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity3 extends AppCompatActivity {
-    private TextView textView101;
-    private TextView textView102;
-    private TextView textView103;
-    private TextView textView105;
+import com.example.guessthenumber.databinding.ActivityMain3Binding;
 
-    private ImageView resultImage;
+public class MainActivity3 extends AppCompatActivity {
+
+    ActivityMain3Binding binding;
+
     private long backPressedTime;
     private Toast backToast;
 
@@ -37,24 +32,20 @@ public class MainActivity3 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main3);
+        binding=ActivityMain3Binding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        textView101 = findViewById(R.id.textView101);
-        textView102 = findViewById(R.id.textView102);
-        textView103 = findViewById(R.id.textView103);
-        textView105 = findViewById(R.id.textView105);
-        resultImage = findViewById(R.id.resultImage);
         Intent intent = getIntent();
-        textView101.setText(intent.getStringExtra("resultOne"));
-        textView102.setText(intent.getStringExtra("resultTwo"));
-        textView103.setText(intent.getStringExtra("resultThree"));
+        binding.textView101.setText(intent.getStringExtra("resultOne"));
+        binding.textView102.setText(intent.getStringExtra("resultTwo"));
+        binding.textView103.setText(intent.getStringExtra("resultThree"));
 
-        if (textView103.getText().toString().matches("0")) {
+        if (binding.textView103.getText().toString().matches("0")) {
 
-            textView105.setText("Correct Number : " + (Integer.toString(getIntent().getIntExtra("resultFour", 00))));
-            resultImage.setImageResource(R.drawable.sadness);
+            binding.textView105.setText("Correct Number : " + (Integer.toString(getIntent().getIntExtra("resultFour", 00))));
+            binding.resultImage.setImageResource(R.drawable.sadness);
         } else {
-            resultImage.setImageResource(R.drawable.celebrating);
+            binding.resultImage.setImageResource(R.drawable.celebrating);
         }
     }
 

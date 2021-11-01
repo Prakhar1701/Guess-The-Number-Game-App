@@ -7,7 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.guessthenumber.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity {
+
+ActivityMainBinding binding;
 
     private long backPressedTime;
     private Toast backToast;
@@ -28,12 +32,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding=ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
     }
+
     public  void openActivityTwo(View view){
         if (backPressedTime + 2000 > System.currentTimeMillis()) {
             backToast.cancel();
         }
+
         Intent ActivityTwo =new Intent(this,MainActivity2.class);
         finish();
         startActivity(ActivityTwo);
