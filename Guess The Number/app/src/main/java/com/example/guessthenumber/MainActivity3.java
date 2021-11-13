@@ -3,6 +3,7 @@ package com.example.guessthenumber;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -32,7 +33,7 @@ public class MainActivity3 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivityMain3Binding.inflate(getLayoutInflater());
+        binding = ActivityMain3Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         Intent intent = getIntent();
@@ -47,6 +48,24 @@ public class MainActivity3 extends AppCompatActivity {
         } else {
             binding.resultImage.setImageResource(R.drawable.celebrating);
         }
+
+
+        //------------------------------------------------------------------------------------------
+        //Implementing highest score functionality using shared preference :
+        SharedPreferences sp = getSharedPreferences("HigestScore", MODE_PRIVATE);
+        SharedPreferences.Editor ed = sp.edit();
+
+        binding.textView107.setText(Integer.toString(sp.getInt("hS", 0)));
+
+        int score = Integer.parseInt(binding.textView103.getText().toString());
+
+        if (score > Integer.parseInt(binding.textView107.getText().toString())) {
+            ed.putInt("hS", score);
+            ed.apply();
+
+            binding.textView107.setText(Integer.toString(sp.getInt("hS", 0)));
+        }
+        //------------------------------------------------------------------------------------------
     }
 
     public void playAgain(View view) {
